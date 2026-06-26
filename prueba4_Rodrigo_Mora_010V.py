@@ -13,9 +13,9 @@ def validar_duracion(duracion):
     return valor if valor > 0 else None
 
 
-def validar_clasificacion(clasificacion):
+def validar_calificacion(calificacion):
     try:
-        valor = float(clasificacion)
+        valor = float(calificacion)
     except ValueError:
         return None
     return valor if 0.0 <= valor <= 10.0 else None
@@ -24,7 +24,7 @@ def validar_clasificacion(clasificacion):
 def agregar_pelicula(lista):
     titulo = input("Ingrese el titulo de la pelicula: ")
     duracion = input("Ingrese la duracion de la pelicula (en minutos): ")
-    clasificacion = input("Ingrese la clasificacion de la pelicula (0.0 a 10.0): ")
+    calificacion = input("Ingrese la calificacion de la pelicula (0.0 a 10.0): ")
 
     if not validar_titulo(titulo):
         print("Error: El titulo no puede estar vacio ni ser solo espacios en blanco.")
@@ -35,15 +35,15 @@ def agregar_pelicula(lista):
         print("Error: La duracion debe ser un numero entero mayor que cero.")
         return
 
-    clasificacion_valida = validar_clasificacion(clasificacion)
-    if clasificacion_valida is None:
-        print("Error: La clasificacion debe ser un numero decimal entre 0.0 y 10.0.")
+    calificacion_valida = validar_calificacion(calificacion)
+    if calificacion_valida is None:
+        print("Error: La calificacion debe ser un numero decimal entre 0.0 y 10.0.")
         return
 
     pelicula = {
         "titulo": titulo,
         "duracion": duracion_valida,
-        "clasificacion": clasificacion_valida,
+        "calificacion": calificacion_valida,
     }
     lista.append(pelicula)
     print(f"Pelicula '{titulo}' agregada exitosamente.")
@@ -67,7 +67,7 @@ def eliminar_pelicula(lista, titulo):
 
 def actualizar_disponibilidad(lista):
     for pelicula in lista:
-        pelicula["disponible"] = "si" if pelicula["clasificacion"] >= 7.0 else "no"
+        pelicula["disponible"] = "si" if pelicula["calificacion"] >= 7.0 else "no"
 
 
 def mostrar_peliculas(lista):
@@ -80,7 +80,7 @@ def mostrar_peliculas(lista):
     for pelicula in lista:
         print(f"Título: {pelicula['titulo']}")
         print(f"Duración: {pelicula['duracion']}")
-        print(f"Calificación: {pelicula['clasificacion']}")
+        print(f"Calificación: {pelicula['calificacion']}")
         if "disponible" in pelicula:
             estado = "DISPONIBLE" if pelicula["disponible"] == "si" else "NO DISPONIBLE"
             print(f"Estado: {estado}")
@@ -108,7 +108,7 @@ while True:
             print("=== PELICULA ENCONTRADA ===")
             print(f"Título: {pelicula['titulo']}")
             print(f"Duración: {pelicula['duracion']}")
-            print(f"Calificación: {pelicula['clasificacion']}")
+            print(f"Calificación: {pelicula['calificacion']}")
             if "disponible" in pelicula:
                 estado = "DISPONIBLE" if pelicula['disponible'] == "si" else "NO DISPONIBLE"
                 print(f"Estado: {estado}")
